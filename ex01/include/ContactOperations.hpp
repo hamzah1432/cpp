@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 00:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/10/20 00:00:00 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/10/27 02:06:47 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 #include <sstream>
 #include <cctype>
 
-// Function declarations
 void addContact(PhoneBook &phoneBook);
 void searchContact(PhoneBook &phoneBook);
 
-#endif /* CONTACTOPERATIONS_HPP */
+#endif

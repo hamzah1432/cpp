@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/18 12:05:46 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/10/19 17:25:48 by halmuhis         ###   ########.fr       */
+/*   Created: 2025/10/27 01:50:16 by halmuhis          #+#    #+#             */
+/*   Updated: 2025/10/27 02:03:09 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "phonebook.hpp"
-#include "Contact.hpp"
-#include "ContactOperations.hpp"
+#include "../include/phonebook.hpp"
+#include "../include/Contact.hpp"
+#include "../include/ContactOperations.hpp"
+
 
 void commandLoop(PhoneBook &phoneBook) {
-    string command;
+    std::string command;
 
     while (true) {
-        cout << "Enter command (ADD, SEARCH, EXIT): ";
-        if (!getline(cin, command)) {
-            cout << "\nExiting program.\n";
+       std::cout << "Enter command (ADD, SEARCH, EXIT): ";
+        if (!std::getline(std::cin, command)) {
+            std::cout << "\nExiting program.\n";
             break;
         }
 
@@ -31,10 +32,9 @@ void commandLoop(PhoneBook &phoneBook) {
             searchContact(phoneBook);
         }
         else if (command == "EXIT") {
-            cout << "Exiting program.\n";
+            std::cout << "Exiting program.\n";
             break;
         }
-        // Any other input is ignored (no error message as per documentation)
     }
 }
 
