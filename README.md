@@ -24,10 +24,17 @@ cpp/
 
 A simple program that converts command-line arguments to uppercase and outputs them.
 
+**Flow & Structure**
+- `main` is the only entry point. It checks `argc` and prints the fallback message (`* LOUD... *`) when no arguments are provided.
+- When arguments exist, `main` loops from `argv[1]` to `argv[argc - 1]` and pipes each through two helpers before writing to `std::cout`.
+- `trim` strips leading/trailing whitespace by walking the string from both ends.
+- `compressSpaces` collapses repeated whitespace segments inside the argument to a single space so the output line feels "clean".
+- After processing each argument the code inserts one extra space between arguments and ends the program with a newline.
+
 **Features:**
-- Converts all arguments to uppercase
-- Trims whitespace from arguments
-- Compresses multiple spaces into single spaces
+- Converts all arguments to uppercase (include `<cctype>` to leverage `std::toupper` if desired)
+- Trims whitespace from arguments (`trim`)
+- Compresses multiple spaces into single spaces (`compressSpaces`)
 - Outputs a default message if no arguments are provided
 
 **Compilation:**
@@ -48,6 +55,15 @@ make
 ### Exercise 01: PhoneBook
 
 A simple phonebook application that stores and manages contact information.
+
+**Flow & Structure**
+- `main` instantiates a `PhoneBook` then hands control to `commandLoop`.
+- `commandLoop` continuously reads a command line and dispatches it to `addContact`, `searchContact`, or exits on `EXIT`/EOF.
+- `Contact` encapsulates the five text fields (first, last, nickname, phone number, darkest secret) with simple setters/getters.
+- `PhoneBook` owns a circular array of 8 `Contact` objects plus two integers (`contactCount`, `nextIndex`). `addContact` overwrites the oldest entry when the storage is full.
+- `addContact(PhoneBook&)` interacts with the user, validates that every field is non-empty, populates a temporary `Contact`, and pushes it into the phone book.
+- `searchContact(PhoneBook&)` prints a formatted table (`std::setw` + truncation with a trailing dot) via `PhoneBook::displayContacts`. When the user enters a valid index, it prints the selected contact in detail.
+- `displayContacts` guards against empty books, prints a consistent header, then enumerates the stored contacts in insertion order, truncating per the subject (10 chars + `.` when longer).
 
 **Features:**
 - **ADD**: Add a new contact (stores up to 8 contacts, oldest gets replaced when full)

@@ -2,6 +2,14 @@
 #include <string>
 #include <cctype>
 
+std::string toUpper(const std::string& s) {
+    std::string result = s;
+    for (size_t i = 0; i < result.size(); i++) {
+        result[i] = std::toupper(static_cast<unsigned char>(result[i]));
+    }
+    return result;
+}
+
 std::string trim(const std::string& s) {
     size_t start = 0, end = s.size();
     while (start < end && isspace(static_cast<unsigned char>(s[start]))) start++;
@@ -20,7 +28,7 @@ std::string compressSpaces(const std::string& s) {
             space = false;
         }
     }
-    return res;
+    return toUpper(res);
 }
 
 int main(int argc, char* argv[]) {
