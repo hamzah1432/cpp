@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:15:53 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/12/03 12:28:31 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/12/04 08:12:15 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ private:
 public:
     Zombie(); 
     Zombie(std::string name);
+    ~Zombie();
     void setName(std::string name);
     void announce(void);
-    ~Zombie();
 };
 
 Zombie* zombieHorde( int N, std::string name );
