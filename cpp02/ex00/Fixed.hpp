@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 08:42:57 by halmuhis          #+#    #+#             */
+/*   Updated: 2025/12/09 08:47:21 by halmuhis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FIXED_HPP
+# define FIXED_HPP
+
+class Fixed {
+    private:
+        int                 _fixedPoint;
+        static const int    _fractionalBits = 8;
+
+    public:
+        Fixed();
+        Fixed(const Fixed &other);
+        Fixed &operator=(const Fixed &other);
+        ~Fixed();
+        int     getRawBits(void) const;
+        void    setRawBits(int const raw);
+};
+
+#endif
