@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 22:56:52 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/12/10 15:49:33 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/12/11 12:06:23 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class ClapTrap {
 
         ClapTrap(const std::string &name);
 
-        void    attack(const std::string &target);
+        virtual void	attack(std::string const &target);
         void    takeDamage(unsigned int amount);
         void    beRepaired(unsigned int amount);
 };
