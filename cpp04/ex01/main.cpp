@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:54:44 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/12/11 13:17:15 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/12/13 16:11:15 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,58 @@
 
 int main()
 {
-    std::cout << "--- Subject Tests (Polymorphism) ---" << std::endl;
+   const int N_ANIMALS = 6;
+    std::cout << "🔷 --- PART 1: Array of Animals Test --- 🔷" << std::endl;
     
-    const Animal* meta = new Animal();
-    const Animal* j = new Dog();
-    const Animal* i = new Cat();
+    const Animal* animals[N_ANIMALS];
 
-    std::cout << j->getType() << " " << std::endl;
-    std::cout << i->getType() << " " << std::endl;
+    std::cout << "\n--> Constructing Animals..." << std::endl;
+    for (int i = 0; i < N_ANIMALS; i++)
+    {
+        if (i < N_ANIMALS / 2)
+            animals[i] = new Dog();
+        else
+            animals[i] = new Cat();
+    }
 
-    i->makeSound(); 
-    j->makeSound();
-    meta->makeSound();
+    std::cout << "\n--> Testing Sounds..." << std::endl;
+    for (int i = 0; i < N_ANIMALS; i++)
+    {
+        animals[i]->makeSound();
+    }
+
+    std::cout << "\n--> Deleting Animals (Check Destructors)..." << std::endl;
+    for (int i = 0; i < N_ANIMALS; i++)
+    {
+        delete animals[i];
+    }
+
+    std::cout << "\n----------------------------------------------------\n" << std::endl;
 
 
-    std::cout << "\n--- Wrong Animal Tests (No Polymorphism) ---" << std::endl;
+    std::cout << "🔷 --- PART 2: Deep Copy Proof --- 🔷" << std::endl;
     
-    const WrongAnimal* wrongMeta = new WrongAnimal();
-    const WrongAnimal* wrongCat = new WrongCat();
-
-    std::cout << wrongCat->getType() << " " << std::endl;
+    std::cout << "\n1. Create Original Dog and set idea..." << std::endl;
+    Dog originalDog;
+    originalDog.setIdea(0, "I love bones! 🦴");
     
-    wrongCat->makeSound();
-    wrongMeta->makeSound();
+    std::cout << "Original Idea: " << originalDog.getIdea(0) << std::endl;
 
-    std::cout << "\n--- Destructors ---" << std::endl;
-    delete j;
-    delete i;
-    delete meta;
-    delete wrongCat;
-    delete wrongMeta;
+    std::cout << "\n2. Create Copy Dog (Copy Constructor)..." << std::endl;
+    Dog copyDog = originalDog; 
 
+    std::cout << "\n3. Change Original Dog's idea..." << std::endl;
+    originalDog.setIdea(0, "I hate cats! 😡"); 
+
+    std::cout << "\n4. Check Ideas (Should be different if Deep Copy works):" << std::endl;
+    std::cout << "Original Dog says: " << originalDog.getIdea(0) << std::endl;
+    std::cout << "Copy Dog says:     " << copyDog.getIdea(0) << std::endl;
+
+    if (copyDog.getIdea(0) == "I love bones! 🦴")
+        std::cout << "\n✅ SUCCESS: Deep Copy verified!" << std::endl;
+    else
+        std::cout << "\n❌ FAILURE: Shallow Copy detected!" << std::endl;
+
+    std::cout << "\n--> End of main (Destructors for Stack objects)..." << std::endl;
     return 0;
 }
