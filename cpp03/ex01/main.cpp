@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:54:44 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/12/10 15:34:53 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/12/13 14:41:28 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main() {
 
 	std::cout << "\n--- Testing Special ScavTrap Actions ---" << std::endl;
 	
-	scav1.attack("Intruder");
+	scav1.attack("No One");
 	scav2.guardGate();
 
 	std::cout << "\n--- Testing Polymorphism/Inheritance ---" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 11:54:44 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/12/10 15:45:12 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/12/13 14:41:49 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main() {
 	std::cout << "--- Testing FragTrap Constructors ---" << std::endl;
 	
 	FragTrap frag1;
-	FragTrap frag2("Bomberman");
+	FragTrap frag2("NO ONE");
 
 	std::cout << "\n--- Testing Stats & Inheritance ---" << std::endl;
 	frag2.attack("Wall"); 
