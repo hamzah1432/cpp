@@ -7,7 +7,6 @@
 
 int main()
 {
-    // تشغيل العشوائية عشان الروبوت
     std::srand(time(NULL));
 
     std::cout << "---------------------------------------------------------" << std::endl;
@@ -21,16 +20,12 @@ int main()
 
         std::cout << form << std::endl;
         
-        // Noob يحاول يوقع (رح يفشل)
         noob.signForm(form);
         
-        // Mid يحاول يوقع (رح ينجح)
         mid.signForm(form);
         
-        // Mid يحاول ينفذ (رح يفشل لأن درجته 140 والمطلوب 137)
         mid.executeForm(form);
         
-        // Pro يحاول ينفذ (رح ينجح ويطبع الشجرة في الملف)
         pro.executeForm(form);
     }
     catch (std::exception &e) {
@@ -44,14 +39,11 @@ int main()
         Bureaucrat pro("Pro", 1);
         RobotomyRequestForm form("Bender");
 
-        // محاولة تنفيذ قبل التوقيع (رح يفشل ويرمي FormNotSignedException)
         pro.executeForm(form);
 
-        // التوقيع ثم التنفيذ
         pro.signForm(form);
         pro.executeForm(form);
         
-        // بننفذ كمان مرة عشان نشوف الـ 50% حظ بتعطي نتائج مختلفة
         pro.executeForm(form);
         pro.executeForm(form);
     }
