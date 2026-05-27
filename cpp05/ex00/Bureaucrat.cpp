@@ -12,7 +12,7 @@
 
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat() : _name("Modeer"), _grade(150){}
+Bureaucrat::Bureaucrat() : _name("Modeer"), _grade(1){}
 
 Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name)
 {
