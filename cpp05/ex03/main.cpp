@@ -1,70 +1,85 @@
 #include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "PresidentialPardonForm.hpp"
+#include "AForm.hpp"
+#include "Intern.hpp"
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 
 int main()
 {
     std::srand(time(NULL));
 
     std::cout << "---------------------------------------------------------" << std::endl;
-    std::cout << "[1] Testing ShrubberyCreationForm (Sign: 145, Exec: 137)" << std::endl;
+    std::cout << "[1] Intern creates a RobotomyRequestForm for 'Bender'" << std::endl;
     std::cout << "---------------------------------------------------------" << std::endl;
-    try {
-        Bureaucrat noob("Noob", 150);
-        Bureaucrat mid("Mid", 140);
-        Bureaucrat pro("Pro", 1);
-        ShrubberyCreationForm form("Home");
-
-        std::cout << form << std::endl;
-        
-        noob.signForm(form);
-        
-        mid.signForm(form);
-        
-        mid.executeForm(form);
-        
-        pro.executeForm(form);
-    }
-    catch (std::exception &e) {
-        std::cout << "Unexpected Exception: " << e.what() << std::endl;
+    {
+        Intern someRandomIntern;
+        AForm *rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        if (rrf)
+        {
+            std::cout << *rrf << std::endl;
+            Bureaucrat boss("Boss", 1);
+            boss.signForm(*rrf);
+            boss.executeForm(*rrf);
+            delete rrf;
+        }
     }
 
     std::cout << "\n---------------------------------------------------------" << std::endl;
-    std::cout << "[2] Testing RobotomyRequestForm (Sign: 72, Exec: 45)" << std::endl;
+    std::cout << "[2] Intern creates a ShrubberyCreationForm for 'Garden'" << std::endl;
     std::cout << "---------------------------------------------------------" << std::endl;
-    try {
-        Bureaucrat pro("Pro", 1);
-        RobotomyRequestForm form("Bender");
-
-        pro.executeForm(form);
-
-        pro.signForm(form);
-        pro.executeForm(form);
-        
-        pro.executeForm(form);
-        pro.executeForm(form);
-    }
-    catch (std::exception &e) {
-        std::cout << "Unexpected Exception: " << e.what() << std::endl;
+    {
+        Intern intern;
+        AForm *scf = intern.makeForm("shrubbery creation", "Garden");
+        if (scf)
+        {
+            Bureaucrat gardener("Gardener", 100);
+            gardener.signForm(*scf);
+            gardener.executeForm(*scf);
+            delete scf;
+        }
     }
 
     std::cout << "\n---------------------------------------------------------" << std::endl;
-    std::cout << "[3] Testing PresidentialPardonForm (Sign: 25, Exec: 5)" << std::endl;
+    std::cout << "[3] Intern creates a PresidentialPardonForm for 'Arthur Dent'" << std::endl;
     std::cout << "---------------------------------------------------------" << std::endl;
-    try {
-        Bureaucrat president("Zaphod", 1);
-        PresidentialPardonForm form("Criminal_X");
-
-        president.signForm(form);
-        president.executeForm(form);
+    {
+        Intern intern;
+        AForm *ppf = intern.makeForm("presidential pardon", "Arthur Dent");
+        if (ppf)
+        {
+            Bureaucrat zaphod("Zaphod", 1);
+            zaphod.signForm(*ppf);
+            zaphod.executeForm(*ppf);
+            delete ppf;
+        }
     }
-    catch (std::exception &e) {
-        std::cout << "Unexpected Exception: " << e.what() << std::endl;
+
+    std::cout << "\n---------------------------------------------------------" << std::endl;
+    std::cout << "[4] Intern asked for an unknown form" << std::endl;
+    std::cout << "---------------------------------------------------------" << std::endl;
+    {
+        Intern intern;
+        AForm *unknown = intern.makeForm("coffee request", "Trillian");
+        if (unknown == NULL)
+            std::cout << "makeForm returned NULL as expected." << std::endl;
+        delete unknown;
     }
 
-    std::cout << "\nDone testing! Check your directory for 'Home_shrubbery' file." << std::endl;
+    std::cout << "\n---------------------------------------------------------" << std::endl;
+    std::cout << "[5] Intern form, but bureaucrat grade too low to execute" << std::endl;
+    std::cout << "---------------------------------------------------------" << std::endl;
+    {
+        Intern intern;
+        AForm *form = intern.makeForm("presidential pardon", "Marvin");
+        if (form)
+        {
+            Bureaucrat weak("Weak", 50);
+            weak.signForm(*form);
+            weak.executeForm(*form);
+            delete form;
+        }
+    }
+
     return 0;
 }
