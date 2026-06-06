@@ -21,12 +21,16 @@ private:
     TypeHandler(const TypeHandler &other);
     TypeHandler &operator=(const TypeHandler &other);
     ~TypeHandler();
+
+    static void printFloating(double value, bool isFloatType);
+
 public:
     static void handlePseudo(const std::string &literal);
     static void handleChar(const std::string &literal);
     static void handleInt(const std::string &literal);
     static void handleFloat(const std::string &literal);
     static void handleDouble(const std::string &literal);
+    static void handleImpossible();
 };
 
 #endif
