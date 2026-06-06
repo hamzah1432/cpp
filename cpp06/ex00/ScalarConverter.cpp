@@ -66,5 +66,6 @@ void ScalarConverter::convert(const std::string &literal)
     }
     else
     {
+        TypeHandler::handleImpossible();
     }
 }
