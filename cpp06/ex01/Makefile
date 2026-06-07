@@ -1,7 +1,7 @@
 NAME = ex01
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp Serializer.cpp
+SRCS = main.cpp Serializer.cpp Data.cpp
 HEADERS = Serializer.hpp Data.hpp
 OBJS = $(SRCS:.cpp=.o)
 
