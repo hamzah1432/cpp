@@ -22,7 +22,7 @@ private:
     TypeHandler &operator=(const TypeHandler &other);
     ~TypeHandler();
 
-    static void printFloating(double value, bool isFloatType);
+    static void printFloating(double value, bool isFloatType, int prec);
 
 public:
     static void handlePseudo(const std::string &literal);

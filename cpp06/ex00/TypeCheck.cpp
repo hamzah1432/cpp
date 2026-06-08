@@ -44,7 +44,7 @@ bool TypeCheck::isPseudoLiteral(const std::string &literal)
 
 bool TypeCheck::isChar(const std::string &literal)
 {
-    return (literal.length() == 1 && !std::isdigit(literal[0]));
+    return (literal.length() == 1 && !std::isdigit(static_cast<unsigned char>(literal[0])));
 }
 
 bool TypeCheck::isInt(const std::string &literal)
