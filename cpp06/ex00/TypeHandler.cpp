@@ -39,15 +39,9 @@ TypeHandler &TypeHandler::operator=(const TypeHandler &other) {
 TypeHandler::~TypeHandler() {}
 
 // =============================================================================
-// 2. Helper: print a float/double value. Whole numbers are shown as "N.0"
-//    (no scientific notation), fractional values keep their natural precision.
+// 2. Helper: print a float/double value.
 // =============================================================================
 
-// prec = how many significant digits the value actually carries, decided by
-// the SOURCE type: a value coming from a float (or narrowed to one) only has
-// ~6 meaningful digits, a value coming from a double has ~15. This keeps the
-// double line of a float literal clean ("4.2") while preserving the full
-// precision of a genuine double literal ("1234.5678").
 void TypeHandler::printFloating(double value, bool isFloatType, int prec)
 {
     std::cout << (isFloatType ? "float: " : "double: ");
@@ -57,17 +51,14 @@ void TypeHandler::printFloating(double value, bool isFloatType, int prec)
 
     if (value == std::floor(value))
     {
-        // whole number (or inf): always "N.0", never scientific
         std::cout << std::fixed << std::setprecision(1) << value;
     }
     else
     {
         std::ostringstream oss;
-        oss << std::setprecision(prec) << value; // default (general) notation
+        oss << std::setprecision(prec) << value;
         std::string out = oss.str();
 
-        // General notation may switch to scientific (e.g. 1e+06). If it did,
-        // reprint in fixed notation and trim trailing zeros to stay decimal.
         if (out.find('e') != std::string::npos || out.find('E') != std::string::npos)
         {
             std::ostringstream fixedOss;
@@ -79,7 +70,7 @@ void TypeHandler::printFloating(double value, bool isFloatType, int prec)
             {
                 std::string::size_type last = out.find_last_not_of('0');
                 if (last == dot)
-                    ++last; // keep one digit after the dot
+                    ++last;
                 out.erase(last + 1);
             }
         }
@@ -90,7 +81,6 @@ void TypeHandler::printFloating(double value, bool isFloatType, int prec)
         std::cout << "f";
     std::cout << std::endl;
 
-    // restore default stream formatting for the next line
     std::cout.unsetf(std::ios::floatfield);
     std::cout << std::setprecision(6);
 }
@@ -183,8 +173,6 @@ void TypeHandler::handleFloat(const std::string &literal)
     else
         std::cout << "int: " << static_cast<int>(val) << std::endl;
 
-    // Source is a float: both lines only carry float precision, so the double
-    // line of e.g. "4.2f" prints "4.2" instead of 4.19999980926514.
     printFloating(f, true, 6);
     printFloating(static_cast<double>(f), false, 6);
 }
@@ -209,8 +197,7 @@ void TypeHandler::handleDouble(const std::string &literal)
     else
         std::cout << "int: " << static_cast<int>(d) << std::endl;
 
-    // Source is a double: the float line is narrowed (6 digits), the double
-    // line keeps full double precision (15 digits).
+
     printFloating(static_cast<float>(d), true, 6);
     printFloating(d, false, 15);
 }
