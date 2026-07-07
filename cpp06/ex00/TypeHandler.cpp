@@ -47,7 +47,7 @@ void TypeHandler::printFloating(double value, bool isFloatType, int prec)
     std::cout << (isFloatType ? "float: " : "double: ");
 
     if (value == 0.0)
-        value = 0.0; // normalize negative zero
+        value = 0.0;
 
     if (value == std::floor(value))
     {
