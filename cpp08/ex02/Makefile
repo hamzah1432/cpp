@@ -2,7 +2,7 @@ NAME =  iter
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS = main.cpp 
-HEADERS = Array.hpp
+HEADERS = MutantStack.hpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

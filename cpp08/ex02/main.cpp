@@ -5,74 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: halmuhis <halmuhesn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/07 17:39:43 by halmuhis          #+#    #+#             */
-/*   Updated: 2026/07/07 17:40:03 by halmuhis         ###   ########.fr       */
+/*   Created: 2026/08/05 05:37:22 by halmuhis          #+#    #+#             */
+/*   Updated: 2026/08/05 05:37:23 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "array.hpp"
+#include <list>
+#include "MutantStack.hpp"
 
 int main()
 {
-    std::cout << "--- Test 1: Default Constructor & size() ---" << std::endl;
-    Array<int> emptyArray;
-    std::cout << "Empty array size: " << emptyArray.size() << std::endl;
-    std::cout << std::endl;
+    std::cout << "--- Testing MutantStack ---" << std::endl;
+    MutantStack<int> mstack;
 
-    std::cout << "--- Test 2: Parameterized Constructor & Default Initialization ---" << std::endl;
-    Array<int> intArray(5);
-    std::cout << "Int array size: " << intArray.size() << std::endl;
-    for (unsigned int i = 0; i < intArray.size(); i++)
+    mstack.push(5);
+    mstack.push(17);
+
+    std::cout << mstack.top() << std::endl;
+
+    mstack.pop();
+    std::cout << mstack.size() << std::endl;
+
+    mstack.push(3);
+    mstack.push(5);
+    mstack.push(737);
+    //[...]
+    mstack.push(0);
+
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
+
+    ++it;
+    --it;
+    while (it != ite)
     {
-        std::cout << "intArray[" << i << "] = " << intArray[i] << " (Default initialized)" << std::endl;
+        std::cout << *it << std::endl;
+        ++it;
     }
-    std::cout << std::endl;
+    std::stack<int> s(mstack);
 
-    std::cout << "--- Test 3: Modifying Elements using operator[] ---" << std::endl;
-    for (unsigned int i = 0; i < intArray.size(); i++)
+    std::cout << "\n--- Testing std::list (for comparison) ---" << std::endl;
+    std::list<int> mlist;
+
+    mlist.push_back(5);
+    mlist.push_back(17);
+
+    std::cout << mlist.back() << std::endl;
+
+    mlist.pop_back();
+    std::cout << mlist.size() << std::endl;
+
+    mlist.push_back(3);
+    mlist.push_back(5);
+    mlist.push_back(737);
+    //[...]
+    mlist.push_back(0);
+
+    std::list<int>::iterator lit = mlist.begin();
+    std::list<int>::iterator lite = mlist.end();
+
+    ++lit;
+    --lit;
+    while (lit != lite)
     {
-        intArray[i] = (i + 1) * 10;
-        std::cout << "intArray[" << i << "] = " << intArray[i] << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--- Test 4: Deep Copy Constructor ---" << std::endl;
-    Array<int> copyArray(intArray);
-    std::cout << "Modifying copyArray[0] to 999..." << std::endl;
-    copyArray[0] = 999;
-    std::cout << "copyArray[0]: " << copyArray[0] << std::endl;
-    std::cout << "intArray[0] : " << intArray[0] << " (Should remain 10 - Deep Copy Works!)" << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "--- Test 5: Assignment Operator ---" << std::endl;
-    Array<int> assignedArray = copyArray; // Using Assignment
-    std::cout << "Modifying assignedArray[1] to 888..." << std::endl;
-    assignedArray[1] = 888;
-    std::cout << "assignedArray[1]: " << assignedArray[1] << std::endl;
-    std::cout << "copyArray[1]    : " << copyArray[1] << " (Should remain 20 - Deep Copy Works!)" << std::endl;
-    std::cout << std::endl;
-
-    std::cout << "--- Test 6: Out of Bounds Exception ---" << std::endl;
-    try
-    {
-        std::cout << "Trying to access index 5 in a 5-element array (Valid indices: 0-4)..." << std::endl;
-        std::cout << intArray[5] << std::endl; // This should throw
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << "Exception caught: " << e.what() << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "--- Test 7: Array with Strings ---" << std::endl;
-    Array<std::string> stringArray(3);
-    stringArray[0] = "Hello";
-    stringArray[1] = "42";
-    stringArray[2] = "Network";
-    for (unsigned int i = 0; i < stringArray.size(); i++)
-    {
-        std::cout << "stringArray[" << i << "] = " << stringArray[i] << std::endl;
+        std::cout << *lit << std::endl;
+        ++lit;
     }
 
     return 0;
