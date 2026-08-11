@@ -1,8 +1,8 @@
-NAME =  array
+NAME =  span
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-SRCS = main.cpp 
-HEADERS = array.hpp
+SRCS = main.cpp Span.cpp
+HEADERS = Span.hpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)

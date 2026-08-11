@@ -5,47 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: halmuhis <halmuhesn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/07 15:49:58 by halmuhis          #+#    #+#             */
-/*   Updated: 2026/07/07 17:41:05 by halmuhis         ###   ########.fr       */
+/*   Created: 2026/08/11 20:52:09 by halmuhis          #+#    #+#             */
+/*   Updated: 2026/08/11 20:52:37 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
-#include "Iter.hpp"
+#include <vector>
+#include <cstdlib> 
+#include <ctime>   
+#include "Span.hpp"
 
-template <typename T>
-void printElement(const T &element) {
-    std::cout << element << " ";
-}
+int main()
+{
+    std::cout << "========================================" << std::endl;
+    std::cout << "          MANDATORY SUBJECT TEST        " << std::endl;
+    std::cout << "========================================" << std::endl;
+    try {
+        Span sp = Span(5);
+        sp.addNumber(6);
+        sp.addNumber(3);
+        sp.addNumber(17);
+        sp.addNumber(9);
+        sp.addNumber(11);
+        std::cout << sp.shortestSpan() << std::endl;
+        std::cout << sp.longestSpan() << std::endl;
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-void increment(int &n) {
-    n++;
-}
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "             EXCEPTION TESTS            " << std::endl;
+    std::cout << "========================================" << std::endl;
+    
+    std::cout << "[Test 1: Adding past the limit]" << std::endl;
+    try {
+        Span emptySpan = Span(1);
+        emptySpan.addNumber(42);
+        std::cout << "Added 42 successfully." << std::endl;
+        emptySpan.addNumber(43); 
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-int main() {
-    std::cout << "--- Test 1: Array of Integers ---" << std::endl;
-    int intArray[] = {1, 2, 3, 4, 5};
-    std::size_t intArrayLen = 5;
+    std::cout << "\n[Test 2: Calculating with insufficient numbers]" << std::endl;
+    try {
+        Span smallSpan = Span(5);
+        smallSpan.addNumber(100);
+        smallSpan.shortestSpan(); 
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-    std::cout << "Original: ";
-    ::iter(intArray, intArrayLen, printElement<int>);
-    std::cout << std::endl;
-
-    ::iter(intArray, intArrayLen, increment);
-
-    std::cout << "After increment: ";
-    ::iter(intArray, intArrayLen, printElement<int>);
-    std::cout << std::endl << std::endl;
-
-
-    std::cout << "--- Test 2: Const Array of Strings ---" << std::endl;
-    const std::string strArray[] = {"Hello", "42", "Templates!"};
-    std::size_t strArrayLen = 3;
-
-    std::cout << "Strings: ";
-    ::iter(strArray, strArrayLen, printElement<std::string>);
-    std::cout << std::endl;
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "    15,000 NUMBERS (ITERATOR RANGE)     " << std::endl;
+    std::cout << "========================================" << std::endl;
+    try {
+        Span massiveSpan = Span(15000);
+        std::vector<int> randomNumbers;
+        
+        std::srand(std::time(NULL));
+        
+        for (int i = 0; i < 15000; i++) {
+            randomNumbers.push_back(std::rand());
+        }
+        
+        massiveSpan.addNumbers(randomNumbers.begin(), randomNumbers.end());
+        
+        std::cout << "Successfully added " << randomNumbers.size() << " elements." << std::endl;
+        std::cout << "Shortest Span: " << massiveSpan.shortestSpan() << std::endl;
+        std::cout << "Longest Span:  " << massiveSpan.longestSpan() << std::endl;
+        
+    } catch (std::exception &e) {
+        std::cerr << e.what() << std::endl;
+    }
 
     return 0;
 }

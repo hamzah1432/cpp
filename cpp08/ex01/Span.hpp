@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhesn@gmail.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/07 15:35:45 by halmuhis          #+#    #+#             */
-/*   Updated: 2026/07/18 10:50:54 by halmuhis         ###   ########.fr       */
+/*   Updated: 2026/08/11 20:50:18 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <iterator>
 
 class Span
 {
